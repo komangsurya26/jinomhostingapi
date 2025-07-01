@@ -37,6 +37,7 @@ class ServiceController extends Controller
             }
 
             // get service
+            $service = [];
             if ($productType == 'vps') {
                 $service = VpsInstance::with('vpsPlan', 'vpsOs')
                     ->where('user_id', $user->id)

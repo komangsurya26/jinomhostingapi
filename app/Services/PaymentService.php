@@ -22,7 +22,7 @@ class PaymentService
         string $userEmail,
         string $userPhone,
         string $productName
-    ) {
+    ): object {
         try {
             $request = (object) [
                 'paymentMethod' => $paymentMethod,
@@ -34,7 +34,8 @@ class PaymentService
                 'phone' => $userPhone,
             ];
 
-            return $this->jinomPayment->createTransaction($request);
+            $response = $this->jinomPayment->createTransaction($request);
+            return $response;
         } catch (\Exception $e) {
             throw $e;
         }

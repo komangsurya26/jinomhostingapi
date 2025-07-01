@@ -1,0 +1,2185 @@
+{
+	"info": {
+		"_postman_id": "a5f3b560-8140-4f44-8436-d97a119603fa",
+		"name": "Jinom Vps Hosting Documentation",
+		"description": "> Reference Documentation is a catalog of all your predefined API components—requests, documentation, authorization, variables, and examples—into an organized asset library for faster onboarding of new team members. \n  \n\n### **Table of contents:**\n\n> 🪐 Get Started  \n📢 Recent Updates  \n🔐 Authorization  \n⏱ Rate and usage limits  \n✍️ Example Responses  \n🤔 Need Help? \n  \n\n## 🪐 **Get Started**\n\nSteps to get started with the Intergalactic Bank API:\n\n1. **Authorization**: Use a valid API Key to send requests to the API endpoints. For this API, everyone will use a temporary API key (prefilled as a collection variable).\n    \n2. **Access**: If you need elevated access to perform actions like creating new accounts, contact the Intergalactic Bank API product owner.\n    \n\n> Some endpoints are for Admin Users only. These are noted in the request's documentation. \n  \n\nFor more details, check out the additional sections below, and click `View Complete Documentation` for the complete documentation. If you have questions about the folder or request, look for the documentation icon for documentation-in-context.\n\n## 📢 Recent Updates\n\n<u>February 2024</u>\n\n- Added optional `createdAt` parameter to `List Transactions` endpoint to filter for transactions created on or after a given date.\n    \n\n<u>January 2024</u>\n\n- We're live! 🎉 The Intergalactic Bank API is now out of beta and available for our internal users. \"Watch\" this collection by clicking the 👁️ icon to be alerted to new updates.\n    \n\n## 🔐 Authorization\n\n- The Intergalactic Bank API uses an API Key for authorization.\n    \n- You must include an API key in each request to the Postman API with the `x-api-key` request header.\n    \n- The API key has been pre-filled as a [collection variable](https://learning.postman.com/docs/sending-requests/variables/). The authorization has been set up at the collection level, so all requests in this collection will automatically inherit the needed header.\n    \n\n> ⚠ Don’t leak your secrets! Initial values are saved, and can be shared with others in team workspaces. Current values are local values that are not saved, and won't be persisted in the original shared collection, environment, or globals. [Learn more about variables in Postman](https://learning.postman.com/docs/sending-requests/variables/#initial-and-current-values) \n  \n\n<img src=\"https://content.pstmn.io/bba75cfc-45c4-409e-9b1d-d604cbdf51a2/UmVmZXJlbmNlIHZhcmlhYmxlcy5naWY=\" width=\"486\" height=\"297\">\n\n## Rate and usage limits\n\nAPI access rate limits apply at a per-API key basis in unit time. The limit is 300 requests per minute.\n\nIf you exceed either limit, your request will return an HTTP `429 Too Many Requests` status code. If your team is consistently hitting these limits, contact the Intergalactic API Product Owner, and we will work to accommodate you.\n\nEach API response returns the following set of headers to help you identify your use status:\n\n| Header | Description |\n| --- | --- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make per minute. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\n## ✍️ Example Responses\n\nWe have documented many of the possible responses you might encounter using [Examples](https://learning.postman.com/docs/sending-requests/examples/) under each request.\n\n### 🤔 **Need Help?**\n\nThe Bank Services team wants to ensure that your team has everything they need to successfully integrate our services into your applications and services. Don't hesitate to reach out to us on our internal Slack by tagging `@bank-services`.\n\n> Is your team utilizing this API in a use case not represented here? We want to know about it! Add a comment with your suggestions and feedback! \n  \n\nFor ideas on how to use these different requests to accomplish common banking tasks, check out the [Workflows Documentation](https://www.postman.com/templates/53736124-ad4d-4cc9-a57a-f7e83402fbe7/Workflow-Documentation) collection. To design your own custom integration, check out the [Blueprint Documentation](https://www.postman.com/templates/75394e82-fb5d-4421-94cf-8799b1bb4af3/Blueprint-Documentation) collection.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25455728",
+		"_collection_link": "https://bold-sunset-578345.postman.co/workspace/179838b2-d9b6-47c1-8820-234a0fcc9ef9/collection/25455728-a5f3b560-8140-4f44-8436-d97a119603fa?action=share&source=collection_link&creator=25455728"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "createdAt",
+									"value": "2024-01-10",
+									"description": "(Optional) filter for transactions created on or after date (YYYY-MM-DD)",
+									"disabled": true
+								},
+								{
+									"key": "toAccountId",
+									"value": "19",
+									"description": "(Optional) filter for the account that initiated the transaction",
+									"disabled": true
+								},
+								{
+									"key": "fromAccountId",
+									"value": "17",
+									"description": "(Optional) filter for the account that received the transaction",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This endpoint retrieves transactions for a given account, optionally filtering on the date created (`createdAt`) and the account receiving the transaction (`toAccountId`).\n\n### Response\n\nUpon a successful request, the response will contain an array of transaction objects matching the search criteria.\n\nIf no matching transactions are found, the transactions object will contain an empty array."
+					},
+					"response": [
+						{
+							"name": "Successful Repsonse",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "createdAt",
+											"value": "2024-01-10",
+											"description": "(Optional) filter for transactions created on or after date (YYYY-MM-DD)",
+											"disabled": true
+										},
+										{
+											"key": "toAccountId",
+											"value": "19",
+											"description": "(Optional) filter for the account that initiated the transaction",
+											"disabled": true
+										},
+										{
+											"key": "fromAccountId",
+											"value": "17",
+											"description": "(Optional) filter for the account that received the transaction",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:47:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "759"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactions\": [\n        {\n            \"id\": 9,\n            \"createdAt\": \"2024-02-17T13:41:26.000Z\",\n            \"fromAccountId\": 17,\n            \"toAccountId\": 19,\n            \"currency\": \"COSMIC_COINS\",\n            \"amount\": 1000\n        },\n        {\n            \"id\": 8,\n            \"createdAt\": \"2024-02-17T13:39:10.000Z\",\n            \"fromAccountId\": 17,\n            \"toAccountId\": 19,\n            \"currency\": \"COSMIC_COINS\",\n            \"amount\": 1000\n        },\n        {\n            \"id\": 7,\n            \"createdAt\": \"2024-02-17T13:12:40.000Z\",\n            \"fromAccountId\": 22,\n            \"toAccountId\": 23,\n            \"currency\": \"COSMIC_COINS\",\n            \"amount\": 250\n        },\n        {\n            \"id\": 6,\n            \"createdAt\": \"2024-02-17T13:12:10.000Z\",\n            \"fromAccountId\": 18,\n            \"toAccountId\": 19,\n            \"currency\": \"COSMIC_COINS\",\n            \"amount\": 250\n        },\n        {\n            \"id\": 4,\n            \"createdAt\": \"2024-02-16T22:30:32.000Z\",\n            \"fromAccountId\": 17,\n            \"toAccountId\": 19,\n            \"currency\": \"COSMIC_COINS\",\n            \"amount\": 1000\n        },\n        {\n            \"id\": 3,\n            \"createdAt\": \"2024-02-16T22:22:22.000Z\",\n            \"fromAccountId\": 18,\n            \"toAccountId\": 19,\n            \"currency\": \"COSMIC_COINS\",\n            \"amount\": 250\n        }\n    ]\n}"
+						},
+						{
+							"name": "No matching transactions found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/transactions?createdAt=2024-01-10&toAccountId=18974440&fromAccountId=9999999",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "createdAt",
+											"value": "2024-01-10",
+											"description": "(Optional) filter for transactions created on or after date (YYYY-MM-DD)"
+										},
+										{
+											"key": "toAccountId",
+											"value": "18974440",
+											"description": "(Optional) filter for the account that initiated the transaction"
+										},
+										{
+											"key": "fromAccountId",
+											"value": "9999999",
+											"description": "(Optional) filter for the account that initiated the transaction"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactions\": []\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/transactions"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:21:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"invalidAuth\",\n    \"message\": \"Please provide a valid API key in the header of the request.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "163",
+									"description": "(Required) ID of transaction"
+								}
+							]
+						},
+						"description": "This endpoint retrieves details of a specific transaction by providing the transaction ID as a path parameter.\n\nIf you are looking to retrieve more than one transaction, check out the **List Transactions** request.\n\n### Response\n\nUpon a successful request, the response will contain a single transaction object matching the search criteria.\n\nIf no transaction with the given ID is found, the request will return a `Not Found` error."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/transactions/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4",
+											"description": "(Required) transaction ID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:48:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "139"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transaction\": {\n        \"id\": 4,\n        \"createdAt\": \"2024-02-16T22:30:32.000Z\",\n        \"fromAccountId\": 17,\n        \"toAccountId\": 19,\n        \"currency\": \"COSMIC_COINS\",\n        \"amount\": 1000\n    }\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/transactions/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "999",
+											"description": "(Required) transaction id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:33:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"instanceNotFound\",\n    \"message\": \"Transaction does not exist.\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/transactions/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:21:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"invalidAuth\",\n    \"message\": \"Please provide a valid API key in the header of the request.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "22"
+								}
+							]
+						},
+						"description": "Delete an account by passing in the account `id` as a path parameter.\n\n### Response\n\nA successful request will return an empty response.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnce an account is deleted, it cannot be restored, so please use this endpoint with caution.\n\nAdditionally, only Bank Admins have permission to update an account. You may encounter a `403 Forbidden` Error if you try to update an account without the correct permissions."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/accounts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"accounts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/accounts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"accounts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:18:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"instanceNotFound\",\n    \"message\": \"Account does not exist.\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/accounts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"accounts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:21:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"invalidAuth\",\n    \"message\": \"Please provide a valid API key in the header of the request.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromAccountId\" : 458,\n    \"toAccountId\" : 460,\n    \"amount\" : 1000,\n    \"currency\" : \"COSMIC_COINS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/users",
+						"description": "Creates a new transaction. You can transfer funds between accounts by providing two account IDs in the `fromAccountId` and `toAccountId` fields.\n\n### Response\n\nA successful request will contain a single transaction object with the newly created transaction `id`\n\nIf there are not enough funds in the originator's account to complete the transaction, the request will return a `400 Insufficient Funds` error.\n\n### Important!\n\nTransactions cannot be edited once created, so use this endpoint with caution."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fromAccountId\" : \"12345678\",\n    \"toAccountId\" : \"87654321\",\n    \"amount\" : 10000,\n    \"currency\" : \"COSMIC_COINS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/transactions"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"transaction\": {\n        \"id\": 8\n    }\n}"
+						},
+						{
+							"name": "Insufficient funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fromAccountId\" : 17,\n    \"toAccountId\" : 19,\n    \"amount\" : 1000000000000000000000,\n    \"currency\" : \"COSMIC_COINS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/transactions"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:16:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"invalidBody\",\n    \"message\": \"Insufficient balance in fromAccountId to initiate the transaction.\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/transactions"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:21:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"invalidAuth\",\n    \"message\": \"Please provide a valid API key in the header of the request.\"\n}"
+						},
+						{
+							"name": "Create New Transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fromAccountId\" : 458,\n    \"toAccountId\" : 460,\n    \"amount\" : 1000,\n    \"currency\" : \"COSMIC_COINS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/transactions"
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"owner\": \"Paul Stars\",\n \t\"balance\" : 57000,\n    \"currency\" : \"COSMIC_COINS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "458"
+								}
+							]
+						},
+						"description": "Update information about an account by passing the `accountId` as a path parameter and additional information through the Request Body.\n\n### Request Body Properties\n\n| **Property Name** | **Data Type** | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full Name | Yes |\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnly Bank Admins have permission to update an account. You may encounter a `403 Forbidden Error` if you try to update an account without the correct permissions."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"owner\":\"4\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/accounts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"accounts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"account\": {\n        \"id\": \"2\",\n        \"owner\" : \"Nova Newman\",\n        \"balance\" : 300,\n        \"currency\" : \"COSMIC_COINS\",\n        \"createdAt\" : \"2024-01-10T14:54:29.739Z\"\n    }\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/accounts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"accounts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:18:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"instanceNotFound\",\n    \"message\": \"Account does not exist.\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/accounts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"accounts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 17 Feb 2024 13:21:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "uWebSockets",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"invalidAuth\",\n    \"message\": \"Please provide a valid API key in the header of the request.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Komang Surya Sedana\",\n    \"email\" : \"ksuryasedana@gmail.com\",\n    \"phone\": \"6281353285093\",\n    \"password\" : \"Komang26\",\n    \"passwordConfirmation\" : \"Komang26\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/register",
+						"description": "Creates a new transaction. You can transfer funds between accounts by providing two account IDs in the `fromAccountId` and `toAccountId` fields.\n\n### Response\n\nA successful request will contain a single transaction object with the newly created transaction `id`\n\nIf there are not enough funds in the originator's account to complete the transaction, the request will return a `400 Insufficient Funds` error.\n\n### Important!\n\nTransactions cannot be edited once created, so use this endpoint with caution."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"Komang Surya Sedana\",\n    \"email\" : \"komangsuryasedana@gmail.com\",\n    \"phone\": \"6281353285093\",\n    \"password\" : \"Komang26\",\n    \"passwordConfirmation\" : \"Komang26\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 12:14:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": false,\n    \"status\": 201,\n    \"message\": \"Register successfully\",\n    \"data\": {\n        \"name\": \"Komang Surya Sedana\",\n        \"email\": \"komangsuryasedana@gmail.com\",\n        \"phone\": \"6281353285093\",\n        \"code_otp\": 133071,\n        \"updated_at\": \"2025-06-23T12:14:42.000000Z\",\n        \"created_at\": \"2025-06-23T12:14:42.000000Z\",\n        \"id\": 1\n    }\n}"
+						},
+						{
+							"name": "Invalid Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"Komang Surya Sedana\",\n    \"email\" : \"ksuryasedana@gmail.com\",\n    \"phone\": \"6281353285093\",\n    \"password\" : \"Komang26\",\n    \"passwordConfirmation\" : \"Komang26\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/register"
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 15:38:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"status\": 422,\n    \"message\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"ksuryasedana@gmail.com\",\n    \"password\" : \"Komang26\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/login",
+						"description": "Creates a new transaction. You can transfer funds between accounts by providing two account IDs in the `fromAccountId` and `toAccountId` fields.\n\n### Response\n\nA successful request will contain a single transaction object with the newly created transaction `id`\n\nIf there are not enough funds in the originator's account to complete the transaction, the request will return a `400 Insufficient Funds` error.\n\n### Important!\n\nTransactions cannot be edited once created, so use this endpoint with caution."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\" : \"komangsuryasedana@gmail.com\",\n    \"password\" : \"Komang26\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 12:20:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": false,\n    \"status\": 200,\n    \"data\": {\n        \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL2xvZ2luIiwiaWF0IjoxNzUwNjgxMjIzLCJleHAiOjE3NTA2ODQ4MjMsIm5iZiI6MTc1MDY4MTIyMywianRpIjoiN2RYSTdLUFhqZVFReGhCWSIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.sp3Vev7hwwE32ysXkgJs6R4x0Upt6NfjvvDAh84JqBQ\",\n        \"tokenType\": \"bearer\",\n        \"expiresIn\": 3600\n    }\n}"
+						},
+						{
+							"name": "Invalid Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\" : \"komangsuryasedana@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/login"
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 12:21:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"status\": 422,\n    \"message\": {\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/api/v1/logout",
+						"description": "Delete an account by passing in the account `id` as a path parameter.\n\n### Response\n\nA successful request will return an empty response.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnce an account is deleted, it cannot be restored, so please use this endpoint with caution.\n\nAdditionally, only Bank Admins have permission to update an account. You may encounter a `403 Forbidden` Error if you try to update an account without the correct permissions."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/logout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 12:49:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": false,\n    \"status\": 200,\n    \"message\": \"Successfully logged out\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/api/v1/me",
+						"description": "Delete an account by passing in the account `id` as a path parameter.\n\n### Response\n\nA successful request will return an empty response.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnce an account is deleted, it cannot be restored, so please use this endpoint with caution.\n\nAdditionally, only Bank Admins have permission to update an account. You may encounter a `403 Forbidden` Error if you try to update an account without the correct permissions."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/logout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 12:49:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": false,\n    \"status\": 200,\n    \"message\": \"Successfully logged out\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/me"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 13:56:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"status\": 401,\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/api/v1/refresh",
+						"description": "Delete an account by passing in the account `id` as a path parameter.\n\n### Response\n\nA successful request will return an empty response.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnce an account is deleted, it cannot be restored, so please use this endpoint with caution.\n\nAdditionally, only Bank Admins have permission to update an account. You may encounter a `403 Forbidden` Error if you try to update an account without the correct permissions."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/logout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 12:49:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": false,\n    \"status\": 200,\n    \"message\": \"Successfully logged out\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{baseUrl}}/api/v1/me"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Jun 2025 13:56:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"status\": 401,\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "VPS",
+					"item": [
+						{
+							"name": "Create Orders Vps",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productType\": \"vps\",\n    \"productId\": 1,\n    \"promoCode\": \"CODEPROMO\", // opsional | masukan kode promo gratis atau promo biasa\n    \"planPricingId\": 2,\n    \"vpsHostname\": \"vpstesting\",\n    \"vpsPassword\": \"Komang26!\",\n    \"vpsOsId\": 2,\n    \"price\": 200000,\n    \"paymentMethod\": \"bca\" //opsional\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/orders/vps",
+								"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+							},
+							"response": [
+								{
+									"name": "Succes",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"productType\": \"vps\", //default\n    \"productId\": 1,\n    \"promoCode\": \"(opsional)\",\n    \"planPricingId\": 2,\n    \"vpsHostname\": \"vpstesting\",\n    \"vpsPassword\": \"Komang26!\",\n    \"vpsOsId\": 2,\n    \"price\": 200000,\n    \"paymentMethod\": \"bri\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/v1/orders/vps"
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.27"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 25 Jun 2025 16:47:14 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": false,\n    \"message\": \"Order berhasil dibuat\",\n    \"data\": {\n        \"user_id\": 2,\n        \"status\": \"pending\",\n        \"payment_method\": \"bri\",\n        \"updated_at\": \"2025-06-25T16:47:11.000000Z\",\n        \"created_at\": \"2025-06-25T16:47:11.000000Z\",\n        \"id\": 1,\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Komang Surya Sedana\",\n            \"email\": \"ksuryasedana@gmail.com\",\n            \"phone\": \"6281353285093\",\n            \"avatar\": null,\n            \"role\": \"guest\",\n            \"code_otp\": \"440841\",\n            \"email_verified_at\": \"2025-06-25T10:08:27.000000Z\",\n            \"created_at\": \"2025-06-25T10:20:22.000000Z\",\n            \"updated_at\": \"2025-06-25T10:20:22.000000Z\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Order Vps",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/orders/vps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"vps"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": null,
+											"disabled": true
+										}
+									]
+								},
+								"description": "Get information about an account by passing the account `id` as a path parameter.\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Shared Hosting",
+					"item": []
+				},
+				{
+					"name": "Collocation",
+					"item": []
+				},
+				{
+					"name": "Update Orders By User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"cancelled\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/orders/:orderId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Update information about an account by passing the `accountId` as a path parameter and additional information through the Request Body.\n\n### Request Body Properties\n\n| **Property Name** | **Data Type** | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full Name | Yes |\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnly Bank Admins have permission to update an account. You may encounter a `403 Forbidden Error` if you try to update an account without the correct permissions."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Promo Code",
+			"item": [
+				{
+					"name": "Apply Promo Codes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/promo-codes?code=CODEPROMO&productType=vps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"promo-codes"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "CODEPROMO"
+								},
+								{
+									"key": "productType",
+									"value": "vps"
+								}
+							]
+						},
+						"description": "Get information about an account by passing the account `id` as a path parameter.\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Get Service Active",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/service?status=active&productType=vps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"service"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "active"
+								},
+								{
+									"key": "productType",
+									"value": "vps"
+								}
+							]
+						},
+						"description": "Get information about an account by passing the account `id` as a path parameter.\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Suspended",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/promo-codes?code=CODEPROMO&productType=vps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"promo-codes"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "CODEPROMO"
+								},
+								{
+									"key": "productType",
+									"value": "vps"
+								}
+							]
+						},
+						"description": "Get information about an account by passing the account `id` as a path parameter.\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Terminated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/promo-codes?code=CODEPROMO&productType=vps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"promo-codes"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "CODEPROMO"
+								},
+								{
+									"key": "productType",
+									"value": "vps"
+								}
+							]
+						},
+						"description": "Get information about an account by passing the account `id` as a path parameter.\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Callback BCA BRI BNI",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status_code\": \"201\",\n    \"status_message\": \"Success, Bank Transfer transaction is created\",\n    \"order_id\": \"VPS-1750870031444045\",\n    \"gross_amount\": 200000,\n    \"payment_type\": \"bank_transfer\",\n    \"transaction_status\": \"settlement\",\n    \"va_numbers\": [\n        {\n            \"va_number\": \"777774589559\"\n        }\n    ],\n    \"expired_at\": \"2025-06-27 00:47:12\",\n    \"signature\": \"5d5641d45bb201f167a0d0db771dc886a9d71a8748fc2f00bc5a0561188e0a5c\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/payments/callback",
+						"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status_code\": \"201\",\n    \"status_message\": \"Success, Bank Transfer transaction is created\",\n    \"order_id\": \"VPS-1750870031444045\",\n    \"gross_amount\": 200000,\n    \"payment_type\": \"bank_transfer\",\n    \"transaction_status\": \"settlement\",\n    \"va_numbers\": [\n        {\n            \"va_number\": \"777774589559\"\n        }\n    ],\n    \"expired_at\": \"2025-06-27 00:47:12\",\n    \"signature\": \"5d5641d45bb201f167a0d0db771dc886a9d71a8748fc2f00bc5a0561188e0a5c\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/payments/callback"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.27"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 17:13:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": false,\n    \"status\": 200,\n    \"message\": \"Success callback\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Callback Alfamart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status_code\": \"201\",\n    \"status_message\": \"Success, cstore transaction is successful\",\n    \"order_id\": \"VPS-20250617-1750150401\",\n    \"gross_amount\": \"1456880.00\",\n    \"payment_type\": \"cstore\",\n    \"transaction_status\": \"pending\",\n    \"payment_code\": \"9827468929951820\",\n    \"expired_at\": \"2025-06-18 16:53:21\",\n    \"signature\": \"1c5c973452333f74852ab7a41d5b3fa85c1b352a6aa199911897ae4b7f39a153\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/payments/callback",
+						"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+					},
+					"response": []
+				},
+				{
+					"name": "Callback Mandiri",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status_code\": \"201\",\n    \"status_message\": \"OK, Mandiri Bill transaction is successful\",\n    \"order_id\": \"VPS-20250530-1748570177\",\n    \"gross_amount\": \"120990.00\",\n    \"payment_type\": \"echannel\",\n    \"transaction_status\": \"pending\",\n    \"bill_key\": \"765652799163\",\n    \"biller_code\": \"70012\",\n    \"expired_at\": \"2025-06-02 09:56:21\",\n    \"signature\": \"5e7f1c93cdf490a958e5cb390cac880493867259e76e958aa87ed5c6990d4661\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/payments/callback",
+						"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+					},
+					"response": []
+				},
+				{
+					"name": "Payment Success Simulation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vaNumber\": \"777774589559\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/api/v1/payments/simulation",
+						"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "VPS",
+							"item": [
+								{
+									"name": "Create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Paket VPS Starter\",\n    \"cpu\": 1,\n    \"ram\": 1024,\n    \"storage\": 10,\n    \"bandwidth\": 2,\n    \"tagline\": \"VPS murah untuk pemula\",\n    \"description\": \"Layanan VPS cocok untuk website kecil hingga menengah.\",\n    \"isFeatured\": true,\n    \"displayOrder\": 1,\n    \"vpsFeatures\": [\n        {\n            \"content\": \"Akses root penuh\",\n            \"highlight\": true,\n            \"displayOrder\": 1\n        },\n        {\n            \"content\": \"Backup harian otomatis\",\n            \"highlight\": false,\n            \"displayOrder\": 2\n        }\n    ],\n    \"vpsPricings\": [\n        {\n            \"durationMonths\": 1,\n            \"basePrice\": 50000,\n            \"discountPercent\": 0\n        },\n        {\n            \"durationMonths\": 6,\n            \"basePrice\": 275000,\n            \"discountPercent\": 10\n        },\n        {\n            \"durationMonths\": 12,\n            \"basePrice\": 500000,\n            \"discountPercent\": 15\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/admin/product/:productType",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"product",
+												":productType"
+											],
+											"variable": [
+												{
+													"key": "productType",
+													"value": "vps"
+												}
+											]
+										},
+										"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Paket VPS Starter\",\n    \"cpu\": 1,\n    \"ram\": 1024,\n    \"storage\": 50,\n    \"bandwidth\": 2,\n    \"tagline\": \"VPS murah untuk pemula\",\n    \"description\": \"Layanan VPS cocok untuk website kecil hingga menengah.\",\n    \"isFeatured\": true,\n    \"displayOrder\": 1,\n    \"vpsFeatures\": [\n        {\n            \"content\": \"Akses root penuh brooo\",\n            \"highlight\": true,\n            \"displayOrder\": 1\n        },\n        {\n            \"content\": \"Backup harian otomatis\",\n            \"highlight\": false,\n            \"displayOrder\": 2\n        }\n    ],\n    \"vpsPricings\": [\n        {\n            \"durationMonths\": 1,\n            \"basePrice\": 50000,\n            \"discountPercent\": 0\n        },\n        {\n            \"durationMonths\": 6,\n            \"basePrice\": 275000,\n            \"discountPercent\": 10\n        },\n        {\n            \"durationMonths\": 12,\n            \"basePrice\": 500000,\n            \"discountPercent\": 15\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/admin/product/:productType/:productId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"product",
+												":productType",
+												":productId"
+											],
+											"variable": [
+												{
+													"key": "productType",
+													"value": "vps"
+												},
+												{
+													"key": "productId",
+													"value": "7"
+												}
+											]
+										},
+										"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+									},
+									"response": []
+								},
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Paket VPS Starter\",\n    \"cpu\": 1,\n    \"ram\": 1024,\n    \"storage\": 10,\n    \"bandwidth\": 2,\n    \"tagline\": \"VPS murah untuk pemula\",\n    \"description\": \"Layanan VPS cocok untuk website kecil hingga menengah.\",\n    \"isFeatured\": true,\n    \"displayOrder\": 1,\n    \"vpsFeatures\": [\n        {\n            \"content\": \"Akses root penuh\",\n            \"highlight\": true,\n            \"displayOrder\": 1\n        },\n        {\n            \"content\": \"Backup harian otomatis\",\n            \"highlight\": false,\n            \"displayOrder\": 2\n        }\n    ],\n    \"vpsPricings\": [\n        {\n            \"durationMonths\": 1,\n            \"basePrice\": 50000,\n            \"discountPercent\": 0\n        },\n        {\n            \"durationMonths\": 6,\n            \"basePrice\": 275000,\n            \"discountPercent\": 10\n        },\n        {\n            \"durationMonths\": 12,\n            \"basePrice\": 500000,\n            \"discountPercent\": 15\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/admin/product/:productType?productId=6",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"product",
+												":productType"
+											],
+											"query": [
+												{
+													"key": "productId",
+													"value": "6"
+												}
+											],
+											"variable": [
+												{
+													"key": "productType",
+													"value": "vps"
+												}
+											]
+										},
+										"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Promo Code",
+					"item": [
+						{
+							"name": "Get Promo Codes By Admin",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/promo-codes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"promo-codes"
+									],
+									"query": [
+										{
+											"key": "owner",
+											"value": "Nova Newman",
+											"description": "(Optional) filter by full name of the account owner",
+											"disabled": true
+										},
+										{
+											"key": "createdAt",
+											"value": "2023-04-10",
+											"description": "(Optional) filter for accounts created on or after date (YYYY-MM-DD)",
+											"disabled": true
+										},
+										{
+											"key": "productType",
+											"value": "vps",
+											"disabled": true
+										}
+									]
+								},
+								"description": "List all accounts that exist at the the Intergalactic Bank. Optionally, filter by `owner` (using a full name), or the `createdAt` date (using `YYYY-MM-DD` format).\n\n### Response\n\nUpon a successful request, the response will return an `accounts` object that contains an array of nested accounts matching the search criteria.\n\nIf no accounts are found to match the search criteria, the `accounts` object will contain an empty array."
+							},
+							"response": []
+						},
+						{
+							"name": "Create Promo Codes By Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productType\": \"vps\",\n    \"planPricingId\": 1,\n    \"code\": \"CODEPROMO\",\n    \"discountPercent\": 100,\n    \"startDate\": \"2025-06-27\",\n    \"endDate\": \"2025-06-28\",\n    \"usageLimit\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/v1/admin/promo-codes",
+								"description": "Creates a new account at the Intergalactic Bank.\n\n### Request Body Properties\n\n| Property Name | Property Type | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full name of the person opening this account | Yes |\n| balance | Number | The starting balance of the account | Yes |\n| currency | String - Possible values: `COSMIC_COINS`, `GALAXY_GOLD`, `MOON_BUCKS` | The currency this account will be using for transactions. This cannot be changed once established. | Yes |\n\n### Response\n\nA successful request will contain a single `account` object with the newly created transaction `id`"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Promo Codes By Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"planPricingId\": 1,\n    \"code\": \"CODEPROMO\",\n    \"discountPercent\": 100,\n    \"startDate\": \"2025-06-27\",\n    \"endDate\": \"2025-06-28\",\n    \"usageLimit\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/promo-codes/:productType",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"promo-codes",
+										":productType"
+									],
+									"variable": [
+										{
+											"key": "productType",
+											"value": "vps"
+										}
+									]
+								},
+								"description": "Update information about an account by passing the `accountId` as a path parameter and additional information through the Request Body.\n\n### Request Body Properties\n\n| **Property Name** | **Data Type** | **Description** | **Required?** |\n| --- | --- | --- | --- |\n| owner | String | Full Name | Yes |\n\n### Response\n\nUpon a successful request, the response will contain an `account` object matching the search criteria.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnly Bank Admins have permission to update an account. You may encounter a `403 Forbidden Error` if you try to update an account without the correct permissions."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Promo Codes By Admin",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/promo-codes/:productType?productId=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"promo-codes",
+										":productType"
+									],
+									"query": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									],
+									"variable": [
+										{
+											"key": "productType",
+											"value": "vps"
+										}
+									]
+								},
+								"description": "Delete an account by passing in the account `id` as a path parameter.\n\n### Response\n\nA successful request will return an empty response.\n\nIf no account with that ID is found, the request will return a `Not Found` error.\n\nIf the requesting party does not have Admin permissions, the request will return a `403 Forbidden` Error.\n\n### Important!\n\nOnce an account is deleted, it cannot be restored, so please use this endpoint with caution.\n\nAdditionally, only Bank Admins have permission to update an account. You may encounter a `403 Forbidden` Error if you try to update an account without the correct permissions."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Get Orders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/orders",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "createdAt",
+											"value": "2023-04-10",
+											"description": "(Optional) filter for accounts created on or after date (YYYY-MM-DD)",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "paid",
+											"disabled": true
+										},
+										{
+											"key": "productType",
+											"value": "vps",
+											"disabled": true
+										}
+									]
+								},
+								"description": "List all accounts that exist at the the Intergalactic Bank. Optionally, filter by `owner` (using a full name), or the `createdAt` date (using `YYYY-MM-DD` format).\n\n### Response\n\nUpon a successful request, the response will return an `accounts` object that contains an array of nested accounts matching the search criteria.\n\nIf no accounts are found to match the search criteria, the `accounts` object will contain an empty array."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{apiKey}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let response = pm.response.json();",
+					"",
+					"if (response.data?.accessToken) {",
+					"    pm.collectionVariables.set('apiKey', response.data.accessToken)",
+					"} else {",
+					"    console.log(\"⚠️ Token not found in response.\");",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "apiKey",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

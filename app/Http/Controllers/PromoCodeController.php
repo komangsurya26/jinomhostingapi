@@ -17,7 +17,7 @@ class PromoCodeController extends Controller
     /**
      * Apply Promo Code
      */
-    public function get(Request $request)
+    public function apply(Request $request)
     {
         try {
             $user = Auth::user();
@@ -38,7 +38,7 @@ class PromoCodeController extends Controller
                 ], 422);
             }
 
-            $promoCode = $this->promo->getPromoCode($user->id, $request->code, $request->productType);
+            $promoCode = $this->promo->applyPromoCode($user->id, $request->code, $request->productType);
 
             return response()->json([
                 'error' => false,

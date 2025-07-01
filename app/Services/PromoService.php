@@ -51,7 +51,7 @@ class PromoService
      * Mendapatkan code promo
      * 
      */
-    public function getPromoCode(int $userId, string $code, string $productType)
+    public function applyPromoCode(int $userId, string $code, string $productType)
     {
         if ($productType == 'vps') {
             $promoCode = VpsDiscountCode::with(['vpsPlanPricing', 'vpsPlanPricing.vpsPlan', 'usages' => function ($query) use ($userId) {
@@ -78,6 +78,73 @@ class PromoService
 
         if ($productType == 'shared_hosting') {
             # code...
+        }
+    }
+
+    public function getPromoCode(string $productType)
+    {
+        if ($productType == 'vps') {
+            $promoCode = VpsDiscountCode::with(['vpsPlanPricing', 'vpsPlanPricing.vpsPlan'])
+                ->get();
+
+            return $promoCode;
+        }
+    }
+
+    public function updatePromoCode($request, string $promoCodeId)
+    {
+        DB::beginTransaction();
+        try {
+            // jika product type vps
+            if ($request->productType == 'vps') {
+                $discount = VpsDiscountCode::find($promoCodeId);
+                if (!$discount) {
+                    throw new \Exception('Promo not found');
+                }
+
+                $vpsPlanPricing = VpsPlanPricing::find($request->planPricingId);
+                if (!$vpsPlanPricing) {
+                    throw new \Exception('Plan pricing not found');
+                }
+
+                $discount->update([
+                    'vps_plan_pricing_id' => $vpsPlanPricing->id,
+                    'code' => $request->code,
+                    'discount_percent' => $request->discountPercent,
+                    'start_date' => $request->startDate,
+                    'end_date' => $request->endDate,
+                    'usage_limit' => $request->usageLimit,
+                ]);
+            }
+            // jika product type shared hosting
+            if ($request->productType == 'shared_hosting') {
+                # code...
+            }
+
+            DB::commit();
+            return $discount;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+    }
+
+    public function deletePromoCode($request, string $promoCodeId)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->productType === 'vps') {
+                $discount = VpsDiscountCode::find($promoCodeId);
+                if (!$discount) {
+                    throw new \Exception('Promo not found');
+                }
+                $discount->delete();
+
+                DB::commit();
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
     }
 }

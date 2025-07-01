@@ -7,27 +7,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use App\Services\PaymentService;
+use Illuminate\Support\Facades\DB;
 
 class PaymentCallbackController extends Controller
 {
     protected $api_token;
 
     public function __construct(
-        protected PaymentService $payment,
+        protected PaymentService $payment
     ) {
         $this->api_token = config('services.payment.key');
     }
 
     public function callback()
     {
-
         $body = file_get_contents('php://input');
-
         $notification = json_decode($body, true);
 
         // API Key from Jinom Payment Gateway
         $string_key =  $this->api_token . $notification['order_id'] . $notification['transaction_status'];
-
         $signature = hash("sha256", $string_key);
 
         $orderId = $notification['order_id'];
@@ -36,39 +34,7 @@ class PaymentCallbackController extends Controller
         $transactionStatus = $notification['transaction_status'];
         $expiredAt = $notification['expired_at'];
 
-        if ($signature === $notification['signature']) {
-            if ($transactionStatus === "settlement") {
-                // kodisi pembayaran berhasil
-
-
-            } else if ($transactionStatus === "expired") {
-                Order::where('transaction_id', $orderId)->update([
-                    'status' => 'expired'
-                ]);
-                // $order = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
-                //     ->where('orders.id', $order_id)->where('orders.status', '!=', 'cancelled');
-                // if ($order->exists()) {
-                //     $order->update([
-                //         'status' => 'expired',
-                //     ]);
-                //     PromoCode::where('id', $order->first()->promo_code_id)
-                //         ->decrement('used_count');
-                // }
-            } else if ($transactionStatus === "pending") {
-                if ($paymentType === 'echannel') {
-                    $paymentCode = $notification['bill_key'];
-                } elseif ($paymentType === 'cstore') {
-                    $paymentCode = $notification['payment_code'];
-                } elseif ($paymentType === 'bank_transfer') {
-                    $paymentCode = $notification['va_numbers'][0]['va_number'];
-                }
-                Order::where('transaction_id', $orderId)->update([
-                    'payment_code' => $paymentCode,
-                    'expired_at' => $expiredAt,
-                    'total_price' => (int) $grossAmount
-                ]);
-            }
-        } else {
+        if ($signature !== $notification['signature']) {
             return response()->json([
                 'error' => true,
                 'status' => 400,
@@ -76,12 +42,38 @@ class PaymentCallbackController extends Controller
             ], 400);
         }
 
-        return response()->json([
-            'error' => false,
-            'status' => 200,
-            'message' => 'Success callback',
-        ], 200);
+        // Start DB transaction for order updates
+        DB::beginTransaction();
+
+        try {
+            if ($transactionStatus === "settlement") {
+                // Payment success
+                Order::where('transaction_id', $orderId)->update([
+                    'status' => 'paid',
+                ]);
+            } elseif ($transactionStatus === "expired") {
+                // Handle expired orders
+                Order::where('transaction_id', $orderId)->update([
+                    'status' => 'expired',
+                ]);
+            }
+
+            DB::commit();
+            return response()->json([
+                'error' => false,
+                'status' => 200,
+                'message' => 'Success callback',
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'error' => true,
+                'status' => 500,
+                'message' => 'Error: ' . $e->getMessage(),
+            ], 500);
+        }
     }
+
 
     public function simulation(Request $request)
     {

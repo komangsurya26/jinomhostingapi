@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderVpsController;
 use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\Admin\PromoCodeController as AdminPromoCodeController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\ServiceController;
 
 Route::group([
     'prefix' => 'v1'
@@ -49,16 +51,18 @@ Route::group([
         Route::post('/simulation', [PaymentCallbackController::class, 'simulation']);
     });
 
+    // service
+    Route::prefix('service')->group(function () {
+        Route::get('/{productType}', [ServiceController::class, 'get']);
+    });
+
     // promo codes
     Route::group([
         'middleware' => ['auth:api', 'verified'],
         'prefix' => 'promo-codes',
     ], function ($router) {
-        Route::post('/', [PromoCodeController::class, 'store']);
-        Route::get('/', [PromoCodeController::class, 'get']);
+        Route::get('/', [PromoCodeController::class, 'apply']);
     });
-
-
 
     // Admin
     Route::group([
@@ -67,9 +71,10 @@ Route::group([
     ], function ($router) {
         // promo codes
         Route::prefix('promo-codes')->group(function () {
-            Route::get('/', [PromoCodeController::class, 'get']);
-            Route::put('/{id}', [PromoCodeController::class, 'update']);
-            Route::delete('/{id}', [PromoCodeController::class, 'delete']);
+            Route::post('/', [AdminPromoCodeController::class, 'store']);
+            Route::get('/', [AdminPromoCodeController::class, 'get']);
+            Route::post('/{id}', [AdminPromoCodeController::class, 'update']);
+            Route::delete('/{id}', [AdminPromoCodeController::class, 'delete']);
         });
 
         //product

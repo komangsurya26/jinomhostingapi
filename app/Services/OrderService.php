@@ -31,7 +31,6 @@ class OrderService
      * @param string $email
      * @param string $password
      * @param string $paymentMethod
-     * @return Order
      */
     public function createOrderVps(
         int $userId,
@@ -47,7 +46,7 @@ class OrderService
         string $email,
         string $password,
         ?string $paymentMethod
-    ): Order {
+    ) {
         DB::beginTransaction();
         try {
             $planPricing = VpsPlanPricing::with('vpsPlan')->find($planPricingId);
@@ -55,7 +54,7 @@ class OrderService
             $order = Order::create([
                 'user_id' => $userId,
                 'status' => $isFree ? 'free' : 'pending',
-                'payment_method' => $paymentMethod
+                'payment_method' => $paymentMethod,
             ]);
 
             // Membuat detail order
@@ -86,7 +85,7 @@ class OrderService
                 $transactionId = 'VPS-' . time() . mt_rand(100000, 999999);
 
                 // proses pembayaran jinom payment
-                $this->paymentService->createVaNumber(
+                $payment = $this->paymentService->createVaNumber(
                     $paymentMethod,
                     $transactionId,
                     $price,
@@ -96,9 +95,22 @@ class OrderService
                     $planPricing->vpsPlan->name
                 );
 
-                // update transaction id
-                $order->transaction_id = $transactionId;
-                $order->save();
+                $paymentType = $payment->payment_type;
+                $paymentCode = '';
+                if ($paymentType === 'echannel') {
+                    $paymentCode = $payment->bill_key;
+                } elseif ($paymentType === 'cstore') {
+                    $paymentCode = $payment->payment_code;
+                } elseif ($paymentType === 'bank_transfer' && isset($payment->va_numbers[0]->va_number)) {
+                    $paymentCode = $payment->va_numbers[0]->va_number;
+                }
+
+                $order->update([
+                    'transaction_id' => $transactionId,
+                    'payment_code' => $paymentCode,
+                    'expired_at' => $payment->expired_at,
+                    'total_price' => (int) $payment->gross_amount
+                ]);
             }
 
             // Jika gratis
